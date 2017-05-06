@@ -23,7 +23,8 @@ public class EnemyShooting : MonoBehaviour
     IEnumerator Fire()
     {
         float fireFreq = Random.Range(minFireFreq, maxFireFreq);
-        Instantiate(bullet, barrel.transform.position, Quaternion.identity);
+        GameObject clone = Instantiate(bullet, barrel.transform.position, Quaternion.identity) as GameObject;
+        clone.GetComponent<Projectile>().tag = "Bullet";
         yield return new WaitForSeconds(fireFreq);
         firing = false;
     }

@@ -78,6 +78,11 @@ public class SpawnManager : MonoBehaviour
         timer += 3;
     }
 
+    public void GainTime(float time)
+    {
+        timer += time;
+    }
+
     public void LoseTime()
     {
         timer -= 3;

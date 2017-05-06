@@ -24,13 +24,19 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Bounds")
+        if(other.tag == "Bounds" && transform.name != "Banker(Clone)")
         {
             GameManager.ActiveObjects.Remove(gameObject);
             if (health.deerType == Health.ObjectType.Friendly)
                 spawnManager.GainTime();
             else
                 spawnManager.LoseTime();
+            Destroy(gameObject);
+        }
+        else
+        {
+            GameManager.ActiveObjects.Remove(gameObject);
+            spawnManager.GainTime(15);
             Destroy(gameObject);
         }
     } 
