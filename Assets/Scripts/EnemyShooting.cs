@@ -8,6 +8,7 @@ public class EnemyShooting : MonoBehaviour
     public float maxFireFreq;
     public GameObject barrel;
     public GameObject bullet;
+    public GameObject muzzleFlash;
 
     bool firing;
 	
@@ -16,6 +17,7 @@ public class EnemyShooting : MonoBehaviour
 		if(!firing)
         {
             firing = true;
+            StartCoroutine(MuzzleFlash());
             StartCoroutine(Fire());
         }
 	}
@@ -23,9 +25,16 @@ public class EnemyShooting : MonoBehaviour
     IEnumerator Fire()
     {
         float fireFreq = Random.Range(minFireFreq, maxFireFreq);
-        GameObject clone = Instantiate(bullet, barrel.transform.position, Quaternion.identity) as GameObject;
+        GameObject clone = Instantiate(bullet, barrel.transform.position, transform.rotation) as GameObject;
         clone.GetComponent<Projectile>().tag = "Bullet";
         yield return new WaitForSeconds(fireFreq);
         firing = false;
+    }
+
+    IEnumerator MuzzleFlash()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(.25f);
+        muzzleFlash.SetActive(false);
     }
 }
