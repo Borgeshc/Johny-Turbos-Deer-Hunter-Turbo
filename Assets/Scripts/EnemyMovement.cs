@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour
         if(other.tag == "Bounds")
         {
             GameManager.ActiveObjects.Remove(gameObject);
-            if (health.deerType == Health.DeerType.Fawn)
+            if (health.deerType == Health.ObjectType.Friendly)
                 spawnManager.GainTime();
             else
                 spawnManager.LoseTime();

@@ -6,6 +6,12 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     public float damage;
+    SpawnManager spawnManager;
+
+    private void Start()
+    {
+        spawnManager = GameObject.Find("GameManager").GetComponent<SpawnManager>();
+    }
 
     private void Update()
     {
@@ -17,6 +23,11 @@ public class Projectile : MonoBehaviour
         if(other.tag == "Enemy")
         {
             other.GetComponent<Health>().TookDamage(damage);
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Player")
+        {
+            spawnManager.LoseTime();
             Destroy(gameObject);
         }
         else if(other.tag == "Bounds")

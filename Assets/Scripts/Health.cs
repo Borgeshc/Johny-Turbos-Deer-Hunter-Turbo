@@ -6,14 +6,14 @@ public class Health : MonoBehaviour
 {
     public float maxHealth;
 
-    public enum DeerType
+    public enum ObjectType
     {
-        Buck,
-        Doe,
-        Fawn
+        Enemy1,
+        Enemy2,
+        Friendly
     };
 
-    public DeerType deerType = DeerType.Buck;
+    public ObjectType deerType = ObjectType.Enemy1;
     
     GameManager gameManager;
     float health;

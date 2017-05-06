@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    public Text buckText;
-    public Text doeText;
-    public Text fawnText;
+    public Text enemy1Text;
+    public Text enemy2Text;
+    public Text friendlyText;
 
     public static List<GameObject> ActiveObjects = new List<GameObject>(); 
 
-    int bucksKilled;
-    int doeKilled;
-    int fawnKilled;
+    int enemy1Killed;
+    int enemy2Killed;
+    int friendlyKilled;
 
     SpawnManager spawnManager;
 
@@ -26,28 +26,39 @@ public class GameManager : MonoBehaviour
         Time.timeScale += .05f;
         switch(type)
         {
-            case "Buck":
-                bucksKilled++;
+            case "Enemy1":
+                enemy1Killed++;
                 spawnManager.GainTime();
-                buckText.text = bucksKilled.ToString();
+                enemy1Text.text = enemy1Killed.ToString();
                 break;
-            case "Doe":
-                doeKilled++;
+            case "Enemy2":
+                enemy2Killed++;
                 spawnManager.GainTime();
-                doeText.text = doeKilled.ToString();
+                enemy2Text.text = enemy2Killed.ToString();
                 break;
-            case "Fawn":
-                fawnKilled++;
+            case "Friendly":
+                friendlyKilled++;
                 spawnManager.LoseTime();
-                fawnText.text = fawnKilled.ToString();
+                friendlyText.text = friendlyKilled.ToString();
                 break;
         }
     }
 
     public void GameEnded()
     {
-        buckText.text = bucksKilled + " Bucks Killed";
-        doeText.text = doeKilled + " Does Killed";
-        fawnText.text = fawnKilled + " Fawns Killed";
+        switch(Application.loadedLevel)
+        {
+            case 1: //Johny Turbo's Deer Hunter Turbo
+                enemy1Text.text = enemy1Killed + " Bucks Killed";
+                enemy2Text.text = enemy2Killed + " Does Killed";
+                friendlyText.text = friendlyKilled + " Fawns Killed";
+                break;
+
+            case 2: //Johny Turbo's Bandit Hunter Turbo
+                enemy1Text.text = enemy1Killed + " Bandits Killed";
+                enemy2Text.text = enemy2Killed + " Thugs Killed";
+                friendlyText.text = friendlyKilled + " Banker Killed";
+                break;
+        }
     }
 }

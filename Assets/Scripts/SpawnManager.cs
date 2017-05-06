@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
     public List<GameObject> deers;
     public List<GameObject> spawnpoints;
     public List<Animator> anims;
+    public GameObject tumbleWeed;
     public GameObject menuButton;
 
     public float timer;
@@ -21,6 +22,8 @@ public class SpawnManager : MonoBehaviour
     bool spawning;
     bool gameover;
     bool endingGame;
+
+    bool spawningTubleWeed;
 
     private void Start()
     {
@@ -41,6 +44,14 @@ public class SpawnManager : MonoBehaviour
             int randomSpawn = Random.Range(0, spawnpoints.Count);
             Instantiate(deers[randomDeer], spawnpoints[randomSpawn].transform.position, Quaternion.identity);
             StartCoroutine(SpawnWaitTime());
+
+            if(Application.loadedLevel == 2 && (int)timer % (spawnTime * 2) == 0 && (int)timer != 0 && !spawningTubleWeed)
+            {
+                spawningTubleWeed = true;
+                int randomTumbleSpawn = Random.Range(0, spawnpoints.Count);
+                Instantiate(tumbleWeed, spawnpoints[randomTumbleSpawn].transform.position, Quaternion.identity);
+                StartCoroutine(TumbleWeedWaitTime());
+            }
         }
 
         if(timer <= 0)
@@ -76,6 +87,12 @@ public class SpawnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         spawning = false;
+    }
+
+    IEnumerator TumbleWeedWaitTime()
+    {
+        yield return new WaitForSeconds(1);
+        spawningTubleWeed = false;
     }
 
     IEnumerator StopGame()
