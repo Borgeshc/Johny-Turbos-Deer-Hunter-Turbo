@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 518b8d5d2b5adb54fa71eaa9f72bb6a8
+timeCreated: 1494028857
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Manaspace
+  fontNames:
+  - Manaspace
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
