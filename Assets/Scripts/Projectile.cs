@@ -20,18 +20,21 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Enemy" && transform.tag != "Bullet" && other.name != "Banker(Clone)")
+        if(other.tag == "Enemy" && transform.tag != "Bullet")
         {
+            print("1");
             other.GetComponent<Health>().TookDamage(damage);
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
         else if (other.tag == "Player" && transform.tag == "Bullet")
         {
+            print("2");
             spawnManager.LoseTime();
             Destroy(gameObject);
         }
         else if(other.tag == "Bounds")
         {
+            print("3");
             Destroy(gameObject);
         }
     }

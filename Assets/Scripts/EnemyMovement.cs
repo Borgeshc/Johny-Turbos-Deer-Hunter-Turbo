@@ -33,8 +33,9 @@ public class EnemyMovement : MonoBehaviour
                 spawnManager.LoseTime();
             Destroy(gameObject);
         }
-        else
+        else if(other.tag == "Bounds")
         {
+            print("This is it");
             GameManager.ActiveObjects.Remove(gameObject);
             spawnManager.GainTime(15);
             Destroy(gameObject);

@@ -102,16 +102,17 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator StopGame()
     {
-        yield return new WaitForSeconds(3);
-        foreach(GameObject go in GameManager.ActiveObjects)
+        foreach (GameObject go in GameManager.ActiveObjects)
         {
             go.SetActive(false);
         }
-        GameObject.Find("Player").SetActive(false);
         GameObject.Find("Timer").SetActive(false);
+        GameObject.Find("Player").SetActive(false);
+        gameManager.GameEnded();
+        yield return new WaitForSeconds(3);
+    
         menuButton.SetActive(true);
 
-        gameManager.GameEnded();
         Time.timeScale = 0;
     }
 }

@@ -14,6 +14,7 @@ public class Shooting : MonoBehaviour
 
     public float reloadTime;
     bool reloading;
+    int ammo = 6;
 
     private void Start()
     {
@@ -27,10 +28,33 @@ public class Shooting : MonoBehaviour
             if(!reloading)
             {
                 reloading = true;
-                StartCoroutine(MuzzleFlash());
-                Fire();
+
+                if (Application.loadedLevel == 2 && ammo > 0)
+                {
+                    StartCoroutine(RevolverMuzzleFlash());
+                    FireRevolver();
+                }
+
+                else
+                {
+                    Fire();
+                    StartCoroutine(MuzzleFlash());
+                }
             }
         }
+    }
+
+    void FireRevolver()
+    {
+        ammo--;
+
+        source.PlayOneShot(gunShotSound);
+        Instantiate(bullet, gunBarrel.transform.position, gunBarrel.transform.rotation);
+
+        if(ammo <= 0)
+            StartCoroutine(Reload());
+
+        reloading = false;
     }
     
     void Fire()
@@ -45,6 +69,7 @@ public class Shooting : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         source.PlayOneShot(reloadSound);
         yield return new WaitForSeconds(reloadTime);
+        ammo = 6;
         reloading = false;
     }
 
@@ -52,6 +77,14 @@ public class Shooting : MonoBehaviour
     {
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(.25f);
+        muzzleFlash.SetActive(false);
+    }
+
+
+    IEnumerator RevolverMuzzleFlash()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(.05f);
         muzzleFlash.SetActive(false);
     }
 }
