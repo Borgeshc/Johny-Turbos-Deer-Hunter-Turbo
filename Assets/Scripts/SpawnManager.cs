@@ -27,6 +27,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         gameManager = GetComponent<GameManager>();
     }
 	

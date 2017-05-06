@@ -14,7 +14,7 @@ public class BanditMovement : MonoBehaviour
 
     void Start()
     {
-        if (GameObject.Find("Player").transform.position.x > transform.position.x)
+        if (GameObject.Find("Player").transform.position.x > transform.position.x && GameObject.Find("Player") != null)
             transform.rotation = new Quaternion(0, 180, 0, 0);
 
         moveTime = Random.Range(minMoveTime, maxMoveTime);

@@ -22,19 +22,22 @@ public class Projectile : MonoBehaviour
     {
         if(other.tag == "Enemy" && transform.tag != "Bullet")
         {
-            print("1");
             other.GetComponent<Health>().TookDamage(damage);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+        }
+        else if (other.name == "Banker(Clone)")
+        {
+            print(other);
+            other.GetComponent<Health>().TookDamage(damage);
+            Destroy(gameObject);
         }
         else if (other.tag == "Player" && transform.tag == "Bullet")
         {
-            print("2");
             spawnManager.LoseTime();
             Destroy(gameObject);
         }
         else if(other.tag == "Bounds")
         {
-            print("3");
             Destroy(gameObject);
         }
     }

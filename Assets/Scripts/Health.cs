@@ -27,7 +27,6 @@ public class Health : MonoBehaviour
 
     public void TookDamage(float damage)
     {
-        print("TookDamage " +  damage);
         health -= damage;
 
         if(health <= 0)
@@ -38,7 +37,6 @@ public class Health : MonoBehaviour
 
     void Died()
     {
-        print("Died");
         gameManager.DeerKilled(deerType.ToString());
         GameManager.ActiveObjects.Remove(gameObject);
         Destroy(gameObject);
