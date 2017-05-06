@@ -9,9 +9,19 @@ public class Movement : MonoBehaviour
     public float maxClamp;
     public bool keyboardTurn;
 
+    public GameObject reloadingText;
+    RectTransform textTransform;
     float vertical;
 
     Quaternion rightRotation = new Quaternion(0,180,0,0);
+
+    private void Start()
+    {
+        if(reloadingText != null)
+        {
+            textTransform = reloadingText.GetComponent<RectTransform>();
+        }
+    }
 
     private void Update()
     {
@@ -22,10 +32,14 @@ public class Movement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A) && transform.rotation != Quaternion.identity)
             {
                 transform.rotation = Quaternion.identity;
+                if (reloadingText != null && reloadingText.transform.rotation != Quaternion.identity)
+                    textTransform.rotation = Quaternion.identity;
             }
             else if (Input.GetKeyDown(KeyCode.D) && transform.rotation != rightRotation)
             {
                 transform.rotation = rightRotation;
+                if (reloadingText != null && reloadingText.transform.rotation != Quaternion.identity)
+                    textTransform.rotation = rightRotation;
             }
         }
         else
@@ -33,10 +47,15 @@ public class Movement : MonoBehaviour
             if(Input.mousePosition.x < Screen.width / 2 && transform.rotation != Quaternion.identity)
             {
                 transform.rotation = Quaternion.identity;
+                if(reloadingText != null && reloadingText.transform.rotation != Quaternion.identity)
+                    textTransform.rotation = Quaternion.identity;
+
             }
             else if (Input.mousePosition.x > Screen.width / 2 && transform.rotation != rightRotation)
             {
                 transform.rotation = rightRotation;
+                if (reloadingText != null && reloadingText.transform.rotation != Quaternion.identity)
+                    textTransform.rotation = rightRotation;
             }
         }
         

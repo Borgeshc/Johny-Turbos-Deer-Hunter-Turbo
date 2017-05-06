@@ -9,6 +9,7 @@ public class Shooting : MonoBehaviour
     public GameObject muzzleFlash;
     public AudioClip gunShotSound;
     public AudioClip reloadSound;
+    public GameObject reloadText;
 
     AudioSource source;
 
@@ -66,10 +67,14 @@ public class Shooting : MonoBehaviour
 
     IEnumerator Reload()
     {
+        if(reloadText != null)
+            reloadText.SetActive(true);
         yield return new WaitForSeconds(.2f);
         source.PlayOneShot(reloadSound);
         yield return new WaitForSeconds(reloadTime);
         ammo = 6;
+        if (reloadText != null)
+            reloadText.SetActive(false);
         reloading = false;
     }
 
