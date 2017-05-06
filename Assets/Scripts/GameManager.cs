@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     public Text buckText;
     public Text doeText;
     public Text fawnText;
+
+    public static List<GameObject> ActiveObjects = new List<GameObject>(); 
 
     int bucksKilled;
     int doeKilled;
@@ -39,5 +42,12 @@ public class GameManager : MonoBehaviour
                 fawnText.text = fawnKilled.ToString();
                 break;
         }
+    }
+
+    public void GameEnded()
+    {
+        buckText.text = bucksKilled + " Bucks Killed";
+        doeText.text = doeKilled + " Does Killed";
+        fawnText.text = fawnKilled + " Fawns Killed";
     }
 }

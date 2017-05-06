@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
     {
         health = maxHealth;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager.ActiveObjects.Add(gameObject);
 	}
 
     public void TookDamage(float damage)
@@ -37,6 +38,7 @@ public class Health : MonoBehaviour
     void Died()
     {
         gameManager.DeerKilled(deerType.ToString());
+        GameManager.ActiveObjects.Remove(gameObject);
         Destroy(gameObject);
     }
 }
