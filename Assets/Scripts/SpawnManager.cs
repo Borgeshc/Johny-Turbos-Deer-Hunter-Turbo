@@ -105,6 +105,7 @@ public class SpawnManager : MonoBehaviour
     {
         foreach (GameObject go in GameManager.ActiveObjects)
         {
+            if(go != null)
             go.SetActive(false);
         }
         GameObject.Find("Timer").SetActive(false);
