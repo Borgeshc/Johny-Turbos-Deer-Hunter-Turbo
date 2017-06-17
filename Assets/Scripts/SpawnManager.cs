@@ -76,7 +76,7 @@ public class SpawnManager : MonoBehaviour
 
     public void GainTime()
     {
-        timer += 3;
+        timer += 5;
     }
 
     public void GainTime(float time)
@@ -86,7 +86,7 @@ public class SpawnManager : MonoBehaviour
 
     public void LoseTime()
     {
-        timer -= 3;
+        timer -= 5;
     }
 
     IEnumerator SpawnWaitTime()
