@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public static List<GameObject> ActiveObjects = new List<GameObject>(); 
 
+    public static bool isSinglePlayer;
+
     int enemy1Killed;
     int enemy2Killed;
     int friendlyKilled;
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if(isSinglePlayer)
         spawnManager = GetComponent<SpawnManager>();
     }
 

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Shooting : MonoBehaviour
+public class Shooting : NetworkBehaviour
 {
     public GameObject gunBarrel;
     public GameObject bullet;
@@ -38,7 +39,7 @@ public class Shooting : MonoBehaviour
 
                 else
                 {
-                    Fire();
+                    CmdFire();
                     StartCoroutine(MuzzleFlash());
                 }
             }
@@ -58,10 +59,34 @@ public class Shooting : MonoBehaviour
         reloading = false;
     }
     
+    [Command]
+    void CmdFire()
+    {
+        RpcFire();
+    }
+
+    [ClientRpc]
+    void RpcFire()
+    {
+        Fire();
+    }
+
     void Fire()
     {
         source.PlayOneShot(gunShotSound);
         Instantiate(bullet, gunBarrel.transform.position, gunBarrel.transform.rotation);
+        StartCoroutine(Reload());
+    }
+
+    [Command]
+    void CmdReload()
+    {
+        RpcReload();
+    }
+
+    [ClientRpc]
+    void RpcReload()
+    {
         StartCoroutine(Reload());
     }
 
@@ -78,13 +103,24 @@ public class Shooting : MonoBehaviour
         reloading = false;
     }
 
+    [Command]
+    void CmdMuzzleFlash()
+    {
+        RpcMuzzleFlash();
+    }
+
+    [ClientRpc]
+    void RpcMuzzleFlash()
+    {
+        StartCoroutine(MuzzleFlash());
+    }
+
     IEnumerator MuzzleFlash()
     {
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(.25f);
         muzzleFlash.SetActive(false);
     }
-
 
     IEnumerator RevolverMuzzleFlash()
     {
